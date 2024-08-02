@@ -8,7 +8,7 @@
    * of the fruit is surrounded by a drop-shadow glow.
    */
   --angle: 240deg;
-  --glow: #00f9;
+  --glow: #0009;
 
   --image-width: 640px;
   --image-height: 400px;
@@ -79,7 +79,7 @@ span.fruit {
 /* Each different checkbox has a parent label, and each parent
  * label contains two overlay spans, one over each game image.
  * The spans over the lower image need to be offset by the
- * height of the upper image, so they are placed each in their 
+ * height of the upper image, so they are placed each in their
  * own span.delta. This means that the same relative top and
  * left values can be used over both images.
 */
@@ -258,19 +258,53 @@ input:checked ~ span img {
 }
 
 /* A subtle "move-glow" animation helps to draw attention to
- * to fruit that have been found. 
+ * to fruit that have been found.
  *
  * There is also a checkbox which allows players to switch off
  * the glow animation, in case this makes them feel queasy.
  */
 
-#move-glow {
-  z-index: 1;
-  /* During development, show bare checkbox at the top right */
-  right: 0; left: auto;
+#move-glow ~ span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: black;
+  padding-right: 2.5em;
+
 }
 
-#move-glow:checked ~ label:has(input:checked) img {
+#move-glow ~ span::before,
+#move-glow ~ span::after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  top: 0.2em;
+  right: 0.1em;
+  height: 1em;
+  width: 2em;
+  box-sizing: border-box;
+  background-color: grey;
+  border: 1px solid grey;
+  border-radius: 1em;
+}
+
+#move-glow ~ span::after {
+  width: 1em;
+  right: 1.1em;
+  background-color: white;
+  transition: right 0.2s;
+}
+
+#move-glow:checked ~ span::before {
+  background-color: #393;
+}
+
+#move-glow:checked ~ span::after {
+  width: 1em;
+  right: 0.1em;
+}
+
+label:has(#move-glow:checked) ~ label:has(input:checked) img {
   animation-name: move-glow;
   animation-duration: 3s;
   animation-iteration-count: infinite;
@@ -362,8 +396,11 @@ input:checked ~ span img {
 
 
 /* TO BE REMOVED  */
+label input {
+  top: auto; bottom: -1em;
+}
 label:nth-of-type(1) input {
-  left: 1em;
+  left: 0;
 }
 
 label:nth-of-type(2) input {
@@ -400,4 +437,8 @@ label:nth-of-type(9) input {
 
 label:nth-of-type(10) input {
   left: 10em;
+}
+
+label:nth-of-type(11) input {
+  left: 11em;
 }
