@@ -13,6 +13,10 @@ body {
   align-items: center;
 }
 
+main {
+  position: relative;
+}
+
 
 /* BUTTONS / BUTTONS / BUTTONS / BUTTONS / BUTTONS / BUTTONS */
 
@@ -78,6 +82,58 @@ div {
   height: 400px;
 }
 
+div#differences {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+input {
+  position: absolute;
+  display: inline-block;
+  top: 0;
+}
+
+label:nth-of-type(1) input {
+  left: 1em;
+}
+
+label:nth-of-type(2) input {
+  left: 2em;
+}
+
+label:nth-of-type(3) input {
+  left: 3em;
+}
+
+label:nth-of-type(4) input {
+  left: 4em;
+}
+
+label:nth-of-type(5) input {
+  left: 5em;
+}
+
+label:nth-of-type(6) input {
+  left: 6em;
+}
+
+label:nth-of-type(7) input {
+  left: 7em;
+}
+
+label:nth-of-type(8) input {
+  left: 8em;
+}
+
+label:nth-of-type(9) input {
+  left: 9em;
+}
+
+label:nth-of-type(10) input {
+  left: 10em;
+}
+
 img {
   position: absolute;
   top: 0;
@@ -89,12 +145,13 @@ svg {
   fill: currentColor;
 }
 
-div.fruit {
+span.fruit {
   position: absolute;
+  display: inline-block;
   background-color: #0f06;
 }
 
-div.pepper-1 {
+span.pepper-1 {
   left: 55px;
   top: 150px;
   width: 45px;
@@ -103,7 +160,7 @@ div.pepper-1 {
   transform: rotate(30deg)
 }
 
-div.pepper-2 {
+span.pepper-2 {
   left: 91px;
   top: 152px;
   width: 43px;
@@ -112,7 +169,7 @@ div.pepper-2 {
   transform: rotate(-30deg)
 }
 
-div.avocado_1  {
+span.avocado_1  {
   left: 56px;
   top: 322px;
   width: 75px;
@@ -124,7 +181,7 @@ div.avocado_1  {
   transform: rotate(40deg)
 }
 
-div.kiwi  {
+span.kiwi  {
   left: 219px;
   top: 294px;
   width: 60px;
@@ -133,7 +190,7 @@ div.kiwi  {
   transform: rotate(-10deg)
 }
 
-div.orange  {
+span.orange  {
   left: 268px;
   top: 225px;
   width: 45px;
@@ -143,7 +200,7 @@ div.orange  {
   transform: rotate(13deg)
 }
 
-div.coconut  {
+span.coconut  {
   left: 317px;
   top: 128px;
   width: 94px;
@@ -154,7 +211,7 @@ div.coconut  {
   transform: rotate(55deg)
 }
 
-div.apple  {
+span.apple  {
   left: 300px;
   top: 273px;
   width: 94px;
@@ -162,7 +219,7 @@ div.apple  {
   border-radius: 100px;
 }
 
-div.asparagus  {
+span.asparagus  {
   left: 336px;
   top: 5px;
   width: 26px;
@@ -173,7 +230,7 @@ div.asparagus  {
   transform: rotate(16deg)
 }
 
-div.leaf  {
+span.leaf  {
   left: 442px;
   top: 211px;
   width: 50px;
@@ -183,7 +240,7 @@ div.leaf  {
   border-bottom-left-radius: 10px;
 }
 
-div.grapes  {
+span.grapes  {
   left: 530px;
   top: 113px;
   width: 60px;
@@ -194,7 +251,7 @@ div.grapes  {
   transform: rotate(16deg)
 }
 
-div.avocado_2  {
+span.avocado_2  {
   left: 571px;
   top: 277px;
   width: 58px;
@@ -204,4 +261,21 @@ div.avocado_2  {
   border-bottom-right-radius: 300px;
   border-bottom-left-radius: 300px;
   transform: rotate(40deg)
+}
+
+span.delta {
+  position: absolute;
+  top: 400px;
+}
+
+span.delta span {
+  background-color: #f006;
+}
+
+label img {
+  pointer-events: none;
+}
+
+span.delta img {
+  opacity: 0.5;
 }
