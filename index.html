@@ -11,6 +11,9 @@
 </head>
 <body>
   <main>
+    <h1>Find
+      <span class="remaining"></span>/10<br>
+      differences</h1>
     <div>
       <img src="images/fruit1.webp" alt="image 1">
       <!--
@@ -22,20 +25,24 @@
       <img src="images/fruit2.webp" alt="image 2">
     </div>
 
-
     <div id="differences">
       <label>
-        <input type="checkbox" name="" id="move-glow" checked>
+        <input type="checkbox" class="slider" id="move-glow" checked>
         <span>Allow shadow animation<span></span></span>
+      </label>
+
+      <label>
+        <input type="checkbox" class="slider" id="show-hints">
+        <span>Show hints<span></span></span>
       </label>
 
       <label>
         <input type="checkbox">
         <span class="fruit pepper-1"></span>
-        <span class="fruit pepper-2"></span>
+        <!-- <span class="fruit pepper-2"></span> -->
         <img src="images/0_pepper.webp" alt="pepper">
         <span class="delta">
-          <span class="fruit pepper-1"></span>
+          <!-- <span class="fruit pepper-1"></span> -->
           <span class="fruit pepper-2"></span>
           <img src="images/0_pepper.webp" alt="pepper">
         </span>

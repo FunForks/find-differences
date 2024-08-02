@@ -1,6 +1,6 @@
 :root {
   font-family:  Avenir, Helvetica, Arial, sans-serif;
-  color: #ddd;
+  /* color: #ddd; */
   background-color: #222;
 
   /* Blue seems to be the most contrastive color for showing
@@ -8,10 +8,12 @@
    * of the fruit is surrounded by a drop-shadow glow.
    */
   --angle: 240deg;
-  --glow: #0009;
+  --glow: #009a;
 
   --image-width: 640px;
   --image-height: 400px;
+
+  counter-reset: remaining 10;
 }
 
 body {
@@ -27,6 +29,16 @@ body {
 main {
   /* Position images relative to main */
   position: relative;
+}
+
+h1 {
+  position: absolute;
+  z-index: 1;
+  line-height: 1em;
+  margin: 0.4em;
+}
+h1 span::before {
+  content: counter(remaining);
 }
 
 /* Position all images absolutely... which means that their
@@ -72,8 +84,15 @@ input {
 span.fruit {
   position: absolute;
   display: inline-block;
-  /* Make these spans visible during development */
-  /* background-color: #0f09; */
+}
+
+/* Show the overlay spans for fruit that have not yet been found
+ *if Show Hints is checked
+ */
+label:has(#show-hints:checked) ~
+ label:has(input:not(:checked))
+ span.fruit {
+  background-color: #0f06;
 }
 
 /* Each different checkbox has a parent label, and each parent
@@ -230,7 +249,7 @@ span.avocado_2  {
 
 label img {
   pointer-events: none;
-  opacity: 0;
+  opacity: 0;;
 }
 
 /* ... and they will be shown when an associated overlay span
@@ -257,6 +276,10 @@ input:checked ~ span img {
   ;
 }
 
+input:checked {
+  counter-increment: remaining -1
+}
+
 /* A subtle "move-glow" animation helps to draw attention to
  * to fruit that have been found.
  *
@@ -264,17 +287,19 @@ input:checked ~ span img {
  * the glow animation, in case this makes them feel queasy.
  */
 
-#move-glow ~ span {
+.slider ~ span {
   position: absolute;
-  top: 0;
-  right: 0;
-  color: black;
+  top: 0.4em;
+  right: 0.2em;
   padding-right: 2.5em;
-
 }
 
-#move-glow ~ span::before,
-#move-glow ~ span::after {
+#show-hints.slider ~ span {
+  top: 2em;
+}
+
+.slider ~ span::before,
+.slider ~ span::after {
   content: "";
   position: absolute;
   display: inline-block;
@@ -288,18 +313,18 @@ input:checked ~ span img {
   border-radius: 1em;
 }
 
-#move-glow ~ span::after {
+.slider ~ span::after {
   width: 1em;
   right: 1.1em;
   background-color: white;
   transition: right 0.2s;
 }
 
-#move-glow:checked ~ span::before {
+.slider:checked ~ span::before {
   background-color: #393;
 }
 
-#move-glow:checked ~ span::after {
+.slider:checked ~ span::after {
   width: 1em;
   right: 0.1em;
 }
@@ -318,7 +343,7 @@ label:has(#move-glow:checked) ~ label:has(input:checked) img {
       sepia(100%)
       saturate(10000%)
       hue-rotate(var(--angle))
-      drop-shadow( 3px 0px 3px var(--glow))
+      drop-shadow( 4px 0px 4px var(--glow))
   }
   12% {
     filter:
@@ -327,7 +352,7 @@ label:has(#move-glow:checked) ~ label:has(input:checked) img {
       sepia(100%)
       saturate(10000%)
       hue-rotate(var(--angle))
-      drop-shadow( 2px 2px 3px var(--glow))
+      drop-shadow( 3px 3px 4px var(--glow))
   }
   25% {
     filter:
@@ -336,7 +361,7 @@ label:has(#move-glow:checked) ~ label:has(input:checked) img {
       sepia(100%)
       saturate(10000%)
       hue-rotate(var(--angle))
-      drop-shadow( 0px 3px 3px var(--glow))
+      drop-shadow( 0px 4px 4px var(--glow))
   }
   37% {
     filter:
@@ -345,7 +370,7 @@ label:has(#move-glow:checked) ~ label:has(input:checked) img {
       sepia(100%)
       saturate(10000%)
       hue-rotate(var(--angle))
-      drop-shadow(-2px 2px 3px var(--glow))
+      drop-shadow(-3px 3px 4px var(--glow))
   }
   50% {
     filter:
@@ -354,7 +379,7 @@ label:has(#move-glow:checked) ~ label:has(input:checked) img {
       sepia(100%)
       saturate(10000%)
       hue-rotate(var(--angle))
-      drop-shadow(-3px 0px 3px var(--glow))
+      drop-shadow(-4px 0px 4px var(--glow))
   }
   62% {
     filter:
@@ -363,7 +388,7 @@ label:has(#move-glow:checked) ~ label:has(input:checked) img {
       sepia(100%)
       saturate(10000%)
       hue-rotate(var(--angle))
-      drop-shadow(-2px -2px 3px var(--glow))
+      drop-shadow(-3px -3px 4px var(--glow))
   }
   75% {
     filter:
@@ -372,7 +397,7 @@ label:has(#move-glow:checked) ~ label:has(input:checked) img {
       sepia(100%)
       saturate(10000%)
       hue-rotate(var(--angle))
-      drop-shadow( 0px -3px 3px var(--glow))
+      drop-shadow( 0px -4px 4px var(--glow))
   }
   87% {
       filter:
@@ -381,7 +406,7 @@ label:has(#move-glow:checked) ~ label:has(input:checked) img {
       sepia(100%)
       saturate(10000%)
       hue-rotate(var(--angle))
-      drop-shadow( 2px -2px 3px var(--glow))
+      drop-shadow( 3px -3px 4px var(--glow))
   }
   100% {
     filter:
@@ -390,7 +415,7 @@ label:has(#move-glow:checked) ~ label:has(input:checked) img {
       sepia(100%)
       saturate(10000%)
       hue-rotate(var(--angle))
-      drop-shadow( 3px 0px 3px var(--glow))
+      drop-shadow( 4px 0px 4px var(--glow))
   }
 }
 
@@ -404,7 +429,7 @@ label:nth-of-type(1) input {
 }
 
 label:nth-of-type(2) input {
-  left: 2em;
+  left: 1.5em;
 }
 
 label:nth-of-type(3) input {
@@ -441,4 +466,8 @@ label:nth-of-type(10) input {
 
 label:nth-of-type(11) input {
   left: 11em;
+}
+
+label:nth-of-type(12) input {
+  left: 12em;
 }
