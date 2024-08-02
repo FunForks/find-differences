@@ -1,0 +1,207 @@
+:root {
+  font-family:  Avenir, Helvetica, Arial, sans-serif;
+  color: #ddd;
+  background-color: #222;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* BUTTONS / BUTTONS / BUTTONS / BUTTONS / BUTTONS / BUTTONS */
+
+div.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+div.buttons button {
+  flex: 1
+}
+
+div.buttons .primary {
+  margin-left: 0.5em;
+  flex: 2
+}
+
+
+button,
+.button {
+  border: 1px outset var(--mid);
+  border-radius: var(--gap);
+  padding: var(--gap);
+}
+
+button:not(:disabled),
+.button:not(:disabled) {
+  cursor: pointer;
+}
+
+button:hover,
+.button:hover {
+  color: #fff;
+}
+
+button:hover:active,
+.button:hover:active {
+  border-style: inset;
+  background-color: #000;
+}
+
+button.pressed,
+.button.pressed {
+  color: #fff;
+  border-style: inset;
+  background-color: #000;
+}
+
+button.primary,
+.button.primary {
+  background-color: var(--primary);
+  border-color: var(--primary-border);
+}
+
+button.primary:active:hover,
+.button.primary:active:hover {
+  background-color: var(--primary-active);
+}
+
+div {
+  position: relative;
+  width: 640px;
+  height: 400px;
+}
+
+img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+svg {
+  color: #f0f9;
+  fill: currentColor;
+}
+
+div.fruit {
+  position: absolute;
+  background-color: #0f06;
+}
+
+div.pepper-1 {
+  left: 55px;
+  top: 150px;
+  width: 45px;
+  height: 20px;
+  border-radius: 100%;
+  transform: rotate(30deg)
+}
+
+div.pepper-2 {
+  left: 91px;
+  top: 152px;
+  width: 43px;
+  height: 19px;
+  border-radius: 100%;
+  transform: rotate(-30deg)
+}
+
+div.avocado_1  {
+  left: 56px;
+  top: 322px;
+  width: 75px;
+  height: 55px;
+  border-top-left-radius: 100%;
+  border-bottom-left-radius: 100%;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  transform: rotate(40deg)
+}
+
+div.kiwi  {
+  left: 219px;
+  top: 294px;
+  width: 60px;
+  height: 72px;
+  border-radius: 100%;
+  transform: rotate(-10deg)
+}
+
+div.orange  {
+  left: 268px;
+  top: 225px;
+  width: 45px;
+  height: 66px;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 1000%;
+  transform: rotate(13deg)
+}
+
+div.coconut  {
+  left: 317px;
+  top: 128px;
+  width: 94px;
+  height: 64px;
+  border-top-left-radius: 75px;
+  border-top-right-radius: 90px;
+  border-bottom-right-radius: 60px;
+  transform: rotate(55deg)
+}
+
+div.apple  {
+  left: 300px;
+  top: 273px;
+  width: 94px;
+  height: 93px;
+  border-radius: 100px;
+}
+
+div.asparagus  {
+  left: 336px;
+  top: 5px;
+  width: 26px;
+  height: 110px;
+  border-top-left-radius: 400px;
+  border-top-right-radius: 500%;
+  border-bottom-left-radius: 2000%;
+  transform: rotate(16deg)
+}
+
+div.leaf  {
+  left: 442px;
+  top: 211px;
+  width: 50px;
+  height: 45px;
+  border-top-left-radius: 18px;
+  border-bottom-right-radius: 33px;
+  border-bottom-left-radius: 10px;
+}
+
+div.grapes  {
+  left: 530px;
+  top: 113px;
+  width: 60px;
+  height: 38px;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 500%;
+  border-bottom-right-radius: 110px;
+  transform: rotate(16deg)
+}
+
+div.avocado_2  {
+  left: 571px;
+  top: 277px;
+  width: 58px;
+  height: 65px;
+  border-top-left-radius: 500%;
+  border-top-right-radius: 1500%;
+  border-bottom-right-radius: 300px;
+  border-bottom-left-radius: 300px;
+  transform: rotate(40deg)
+}

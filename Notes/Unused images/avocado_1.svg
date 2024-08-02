@@ -1,0 +1,29 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="640"
+  height="400"
+  viewBox="0 0 640 400"
+
+  fill="#00f6"
+  stroke="none"
+>
+  <path
+    class="avocado_1"
+    d="
+      M 76 320
+      h 4
+      l 34 12
+      l 14 16
+      v 17
+      l -12 15
+      l -12 4
+      h -9
+      l -10 -4
+      l -10 -9
+      l -8 -18
+      l -3 -12
+      l 3 -17
+      Z
+    "
+  />
+</svg>
