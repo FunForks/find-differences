@@ -1,6 +1,5 @@
 :root {
   font-family:  Avenir, Helvetica, Arial, sans-serif;
-  /* color: #ddd; */
   background-color: #222;
 
   /* Blue seems to be the most contrastive color for showing
@@ -13,7 +12,9 @@
   --image-width: 640px;
   --image-height: 400px;
 
-  counter-reset: remaining 10;
+  counter-reset:
+    remaining 0
+    total 0;
 }
 
 body {
@@ -31,14 +32,55 @@ main {
   position: relative;
 }
 
+/* Instructions and Congratulations */
 h1 {
   position: absolute;
-  z-index: 1;
+  top: 0;
+  left: 0;
+  font-size: 1.95rem;
   line-height: 1em;
-  margin: 0.4em;
+  margin: 0.5em 10px;
+  display: inline-block;
+  background-color: #fff;
 }
-h1 span::before {
+span.remaining::before {
   content: counter(remaining);
+  color: red;
+}
+h1 span::after {
+  content: counter(total);
+}
+h1.found {
+  display: none;
+  color: #c60;
+
+  i {
+    position: absolute;
+    top: 0.5em;
+    left: 440px;
+    background-color: #fff;
+    display: inline-block;
+    width: 190px;
+    height: 1em;
+    pointer-events: all;
+  }
+}
+
+/* If all the (non-slider) checkboxes are checked,
+ * then you have won.
+ */
+label:has(#f0:checked) ~
+label:has(#f1:checked) ~
+label:has(#f2:checked) ~
+label:has(#f3:checked) ~
+label:has(#f4:checked) ~
+label:has(#f5:checked) ~
+label:has(#f6:checked) ~
+label:has(#f7:checked) ~
+label:has(#f8:checked) ~
+label:has(#f9:checked) ~
+h1.found {
+  display: block;
 }
 
 /* Position all images absolutely... which means that their
@@ -249,7 +291,8 @@ span.avocado_2  {
 
 label img {
   pointer-events: none;
-  opacity: 0;;
+  opacity: 0;
+  transition: opacity 0.5s;
 }
 
 /* ... and they will be shown when an associated overlay span
@@ -276,8 +319,23 @@ input:checked ~ span img {
   ;
 }
 
-input:checked {
-  counter-increment: remaining -1
+/* Count all the non-slider inputs to calculate total */
+input:not(.slider) {
+  counter-increment: total;
+}
+
+/* The span immediately after a non-slider checkbox is hidden
+ * when the checkbox is checked. Counting those that are still
+ * displayed gives the number of differences still to find.
+ */
+input:not(.slider):not(:checked) + span {
+  counter-increment: remaining
+}
+
+/* Hide the active label element, so you can't uncheck the box */
+input:not(.slider):checked + span,
+input:not(.slider):checked ~ span span {
+  display: none;
 }
 
 /* A subtle "move-glow" animation helps to draw attention to
@@ -420,8 +478,8 @@ label:has(#move-glow:checked) ~ label:has(input:checked) img {
 }
 
 
-/* TO BE REMOVED  */
-label input {
+/* Display checkboxes during development  */
+/* label input {
   top: auto; bottom: -1em;
 }
 label:nth-of-type(1) input {
@@ -470,4 +528,4 @@ label:nth-of-type(11) input {
 
 label:nth-of-type(12) input {
   left: 12em;
-}
+} */

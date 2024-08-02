@@ -11,9 +11,6 @@
 </head>
 <body>
   <main>
-    <h1>Find
-      <span class="remaining"></span>/10<br>
-      differences</h1>
     <div>
       <img src="images/fruit1.webp" alt="image 1">
       <!--
@@ -37,7 +34,7 @@
       </label>
 
       <label>
-        <input type="checkbox">
+        <input type="checkbox" id="f0">
         <span class="fruit pepper-1"></span>
         <!-- <span class="fruit pepper-2"></span> -->
         <img src="images/0_pepper.webp" alt="pepper">
@@ -49,7 +46,7 @@
       </label>
 
       <label>
-        <input type="checkbox">
+        <input type="checkbox" id="f1">
         <span class="fruit avocado_1"></span>
         <img src="images/1_avocado.webp" alt="avocado">
         <span class="delta">
@@ -59,7 +56,7 @@
       </label>
 
       <label>
-        <input type="checkbox">
+        <input type="checkbox" id="f2">
         <span class="fruit kiwi"></span>
         <img src="images/2_kiwi.webp" alt="kiwi">
         <span class="delta">
@@ -69,7 +66,7 @@
       </label>
 
       <label>
-        <input type="checkbox">
+        <input type="checkbox" id="f3">
         <span class="fruit orange"></span>
         <img src="images/3_orange.webp" alt="orange">
         <span class="delta">
@@ -79,7 +76,7 @@
       </label>
 
       <label>
-        <input type="checkbox">
+        <input type="checkbox" id="f4">
         <span class="fruit apple"></span>
         <img src="images/4_apple.webp" alt="apple">
         <span class="delta">
@@ -89,7 +86,7 @@
       </label>
 
       <label>
-        <input type="checkbox">
+        <input type="checkbox" id="f5">
         <span class="fruit coconut"></span>
         <img src="images/5_coconut.webp" alt="coconut">
         <span class="delta">
@@ -99,7 +96,7 @@
       </label>
 
       <label>
-        <input type="checkbox">
+        <input type="checkbox" id="f6">
         <span class="fruit asparagus"></span>
         <img src="images/6_asparagus.webp" alt="asparagus">
         <span class="delta">
@@ -109,7 +106,7 @@
       </label>
 
       <label>
-        <input type="checkbox">
+        <input type="checkbox" id="f7">
         <span class="fruit leaf"></span>
         <img src="images/7_leaf.webp" alt="leaf">
         <span class="delta">
@@ -119,7 +116,7 @@
       </label>
 
       <label>
-        <input type="checkbox">
+        <input type="checkbox" id="f8">
         <span class="fruit grapes"></span>
         <img src="images/8_grapes.webp" alt="grapes">
         <span class="delta">
@@ -129,7 +126,7 @@
       </label>
 
       <label>
-        <input type="checkbox">
+        <input type="checkbox" id="f9">
         <span class="fruit avocado_2"></span>
         <img src="images/9_avocado.webp" alt="avocado">
         <span class="delta">
@@ -137,6 +134,19 @@
           <img src="images/9_avocado.webp" alt="avocado">
         </span>
       </label>
+
+      <!-- span.remaining::before will show remaining
+           span::after            will show total
+      -->
+      <h1 class="find">Find <span class="remaining">/</span>
+        <br>differences
+      </h1>
+
+      <h1 class="found">You found all <br>
+        <span></span> differences!<br>
+        <!-- HACK: Use i to hide Show Hints checkbox -->
+        <i></i>
+      </h1>
     </div>
   </main>
 </body>
