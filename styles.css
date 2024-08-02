@@ -2,155 +2,110 @@
   font-family:  Avenir, Helvetica, Arial, sans-serif;
   color: #ddd;
   background-color: #222;
+
+  /* Blue seems to be the most contrastive color for showing
+   * the differences that have been found. The silhouette of
+   * of the fruit is surrounded by a drop-shadow glow.
+   */
+  --angle: 240deg;
+  --glow: #00f9;
+
+  --image-width: 640px;
+  --image-height: 400px;
 }
 
 body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  /* Centre the main element */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 main {
+  /* Position images relative to main */
   position: relative;
 }
 
-
-/* BUTTONS / BUTTONS / BUTTONS / BUTTONS / BUTTONS / BUTTONS */
-
-div.buttons {
-  display: flex;
-  justify-content: space-between;
-}
-
-div.buttons button {
-  flex: 1
-}
-
-div.buttons .primary {
-  margin-left: 0.5em;
-  flex: 2
-}
-
-
-button,
-.button {
-  border: 1px outset var(--mid);
-  border-radius: var(--gap);
-  padding: var(--gap);
-}
-
-button:not(:disabled),
-.button:not(:disabled) {
-  cursor: pointer;
-}
-
-button:hover,
-.button:hover {
-  color: #fff;
-}
-
-button:hover:active,
-.button:hover:active {
-  border-style: inset;
-  background-color: #000;
-}
-
-button.pressed,
-.button.pressed {
-  color: #fff;
-  border-style: inset;
-  background-color: #000;
-}
-
-button.primary,
-.button.primary {
-  background-color: var(--primary);
-  border-color: var(--primary-border);
-}
-
-button.primary:active:hover,
-.button.primary:active:hover {
-  background-color: var(--primary-active);
-}
-
-div {
-  position: relative;
-  width: 640px;
-  height: 400px;
-}
-
-div#differences {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-input {
-  position: absolute;
-  display: inline-block;
-  top: 0;
-}
-
-label:nth-of-type(1) input {
-  left: 1em;
-}
-
-label:nth-of-type(2) input {
-  left: 2em;
-}
-
-label:nth-of-type(3) input {
-  left: 3em;
-}
-
-label:nth-of-type(4) input {
-  left: 4em;
-}
-
-label:nth-of-type(5) input {
-  left: 5em;
-}
-
-label:nth-of-type(6) input {
-  left: 6em;
-}
-
-label:nth-of-type(7) input {
-  left: 7em;
-}
-
-label:nth-of-type(8) input {
-  left: 8em;
-}
-
-label:nth-of-type(9) input {
-  left: 9em;
-}
-
-label:nth-of-type(10) input {
-  left: 10em;
-}
-
+/* Position all images absolutely... which means that their
+ * dimensions will not set the dimensions of their parent divs...
+ */
 img {
   position: absolute;
   top: 0;
   left: 0;
 }
 
-svg {
-  color: #f0f9;
-  fill: currentColor;
+div {
+  /* ... so explicitly make the (parent) divs the size of the
+   * images they contain
+   */
+  position: relative;
+  width: var(--image-width);
+  height: var(--image-height);
 }
 
+/* Align the differences div with the top image. Its
+ * height will be limited by the rule above, but its
+ * overflow content will not be hidden.
+ */
+div#differences {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Hide all the checkboxes. (Only show their labels.) */
+input {
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  left: -999px;
+}
+
+/* Each (missing) fruit in each image has an invisible custom-
+ * fitted span overlay that reacts to the pointer. These must
+ * be positioned absolutely.
+ */
 span.fruit {
   position: absolute;
   display: inline-block;
-  background-color: #0f06;
+  /* Make these spans visible during development */
+  /* background-color: #0f09; */
 }
 
+/* Each different checkbox has a parent label, and each parent
+ * label contains two overlay spans, one over each game image.
+ * The spans over the lower image need to be offset by the
+ * height of the upper image, so they are placed each in their 
+ * own span.delta. This means that the same relative top and
+ * left values can be used over both images.
+*/
+span.delta {
+  position: absolute;
+  top: var(--image-height);
+}
+
+/* The position, dimensions, rotation and various corner radii
+ * for the overlay spans have been chosen by trial and error to
+ * fit the shape of each fruit as accurately as possible. It's
+ * OK that this shape is not exact, because the player will
+ * never see the overlays.
+ *
+ * The exact shape of each fruit is stored in a .WEBP image,
+ * which will be shown when the overlay span is clicked.
+ * However, there is currently no way to detect if the pointer
+ * is over the transparent part of an image, and for simplicity
+ * these images are the same size as the main image. Like the
+ * overlay spans, these .WEBP images initially have an opacity
+ * of 0.
+ */
+
+/* The stem of the yellow bell pepper is best covered by two
+ * spans
+ */
 span.pepper-1 {
   left: 55px;
   top: 150px;
@@ -169,6 +124,7 @@ span.pepper-2 {
   transform: rotate(-30deg)
 }
 
+/* There are two avocados to find */
 span.avocado_1  {
   left: 56px;
   top: 322px;
@@ -263,19 +219,185 @@ span.avocado_2  {
   transform: rotate(40deg)
 }
 
-span.delta {
-  position: absolute;
-  top: 400px;
-}
-
-span.delta span {
-  background-color: #f006;
-}
+/* Each fruit has a image that shows its exact silhouette. For
+ * simplicity, all images are exactly the same size as the main
+ * images, with a transparent background. To prevent these images
+ * from capturing pointer events intended for the overlay spans
+ * beneath them, they are set to not react with the pointer.
+ *
+ * They are initially hidden...
+ */
 
 label img {
   pointer-events: none;
+  opacity: 0;
 }
 
-span.delta img {
+/* ... and they will be shown when an associated overlay span
+ * is pressed. Pressing an overlay span toggles the checkbox
+ * in the same label. The fruit in the top image is a direct
+ * sibling of the checkbox input. The fruit in the bottom image
+ * is contained in a span.delta. Both need to be shown when the
+ * checkbox input is checked.
+ */
+
+input:checked ~ img,
+input:checked ~ span img {
   opacity: 0.5;
+  filter:
+    invert(1)
+    brightness(50%)
+    sepia(100%)
+    saturate(10000%)
+    hue-rotate(var(--angle))
+    drop-shadow( 2px  0px 2px var(--glow))
+    drop-shadow( 0px  2px 2px var(--glow))
+    drop-shadow(-2px  2px 2px var(--glow))
+    drop-shadow( 0px -2px 2px var(--glow))
+  ;
+}
+
+/* A subtle "move-glow" animation helps to draw attention to
+ * to fruit that have been found. 
+ *
+ * There is also a checkbox which allows players to switch off
+ * the glow animation, in case this makes them feel queasy.
+ */
+
+#move-glow {
+  z-index: 1;
+  /* During development, show bare checkbox at the top right */
+  right: 0; left: auto;
+}
+
+#move-glow:checked ~ label:has(input:checked) img {
+  animation-name: move-glow;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes move-glow {
+  0% {
+    filter:
+      invert(1)
+      brightness(50%)
+      sepia(100%)
+      saturate(10000%)
+      hue-rotate(var(--angle))
+      drop-shadow( 3px 0px 3px var(--glow))
+  }
+  12% {
+    filter:
+      invert(1)
+      brightness(50%)
+      sepia(100%)
+      saturate(10000%)
+      hue-rotate(var(--angle))
+      drop-shadow( 2px 2px 3px var(--glow))
+  }
+  25% {
+    filter:
+      invert(1)
+      brightness(50%)
+      sepia(100%)
+      saturate(10000%)
+      hue-rotate(var(--angle))
+      drop-shadow( 0px 3px 3px var(--glow))
+  }
+  37% {
+    filter:
+      invert(1)
+      brightness(50%)
+      sepia(100%)
+      saturate(10000%)
+      hue-rotate(var(--angle))
+      drop-shadow(-2px 2px 3px var(--glow))
+  }
+  50% {
+    filter:
+      invert(1)
+      brightness(50%)
+      sepia(100%)
+      saturate(10000%)
+      hue-rotate(var(--angle))
+      drop-shadow(-3px 0px 3px var(--glow))
+  }
+  62% {
+    filter:
+      invert(1)
+      brightness(50%)
+      sepia(100%)
+      saturate(10000%)
+      hue-rotate(var(--angle))
+      drop-shadow(-2px -2px 3px var(--glow))
+  }
+  75% {
+    filter:
+      invert(1)
+      brightness(50%)
+      sepia(100%)
+      saturate(10000%)
+      hue-rotate(var(--angle))
+      drop-shadow( 0px -3px 3px var(--glow))
+  }
+  87% {
+      filter:
+      invert(1)
+      brightness(50%)
+      sepia(100%)
+      saturate(10000%)
+      hue-rotate(var(--angle))
+      drop-shadow( 2px -2px 3px var(--glow))
+  }
+  100% {
+    filter:
+      invert(1)
+      brightness(50%)
+      sepia(100%)
+      saturate(10000%)
+      hue-rotate(var(--angle))
+      drop-shadow( 3px 0px 3px var(--glow))
+  }
+}
+
+
+/* TO BE REMOVED  */
+label:nth-of-type(1) input {
+  left: 1em;
+}
+
+label:nth-of-type(2) input {
+  left: 2em;
+}
+
+label:nth-of-type(3) input {
+  left: 3em;
+}
+
+label:nth-of-type(4) input {
+  left: 4em;
+}
+
+label:nth-of-type(5) input {
+  left: 5em;
+}
+
+label:nth-of-type(6) input {
+  left: 6em;
+}
+
+label:nth-of-type(7) input {
+  left: 7em;
+}
+
+label:nth-of-type(8) input {
+  left: 8em;
+}
+
+label:nth-of-type(9) input {
+  left: 9em;
+}
+
+label:nth-of-type(10) input {
+  left: 10em;
 }
