@@ -50,10 +50,12 @@ span.remaining::before {
 h1 span::after {
   content: counter(total);
 }
+/* Hide .found message until all checkboxes are checked */
 h1.found {
   display: none;
   color: #c60;
 
+  /* HACK: Use i to hide the Show Hints checkbox */
   i {
     position: absolute;
     top: 0.5em;
@@ -62,12 +64,14 @@ h1.found {
     display: inline-block;
     width: 190px;
     height: 1em;
-    pointer-events: all;
   }
 }
 
-/* If all the (non-slider) checkboxes are checked,
- * then you have won.
+/* If all the (non-slider) checkboxes are checked, then you
+ * have won. Show the h1.found message whose opaque background
+ * will hide the message telling you how many more differences
+ * to find. The h1's child i element will hide the now unneeded
+ * Show Hints checkbox slider.
  */
 label:has(#f0:checked) ~
 label:has(#f1:checked) ~
@@ -479,7 +483,7 @@ label:has(#move-glow:checked) ~ label:has(input:checked) img {
 
 
 /* Display checkboxes during development  */
-/* label input {
+label input {
   top: auto; bottom: -1em;
 }
 label:nth-of-type(1) input {
@@ -528,4 +532,4 @@ label:nth-of-type(11) input {
 
 label:nth-of-type(12) input {
   left: 12em;
-} */
+}
