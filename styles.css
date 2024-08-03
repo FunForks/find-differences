@@ -8,6 +8,7 @@
    */
   --angle: 240deg;
   --glow: #009a;
+  --hint: #00f6;
 
   --image-width: 640px;
   --image-height: 400px;
@@ -63,7 +64,7 @@ h1.found {
     background-color: #fff;
     display: inline-block;
     width: 190px;
-    height: 1em;
+    height: 25px;
   }
 }
 
@@ -123,6 +124,96 @@ input {
   left: -999px;
 }
 
+
+/* Highlight color */
+
+div.color {
+  --size: 24px;
+  --twice: calc(2 * var(--size));
+  position: absolute;
+  top: 57px;
+  right: 0.2em;
+}
+
+div.color span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-block;
+  width: var(--size);
+  height: var(--size);
+  box-sizing: border-box;
+  background-color: #8c8;
+  border: 1px solid white;
+
+}
+
+html:has(div.color input#green:checked) {
+  --angle: 120deg;
+  --glow: #090a;
+  --hint: #0f03;
+}
+
+div.color label:nth-child(2) span {
+  right: var(--size);
+  background-color: #c96;
+}
+
+html:has(div.color input#orange:checked) {
+  --angle:60deg;
+  --glow: #990a;
+  --hint: #fc05;
+}
+
+div.color label:nth-child(3) span {
+  right: var(--twice);
+  background-color: #f88;
+}
+
+html:has(div.color input#red:checked) {
+  --angle: 0deg;
+  --glow: #900a;
+  --hint: #f003;
+}
+
+div.color label:nth-child(4) span {
+  top: var(--size);
+  right: var(--size);
+  background-color: #f8f;
+}
+
+html:has(div.color input#magenta:checked) {
+  --angle: 300deg;
+  --glow: #909a;
+  --hint: #f0f3;
+}
+
+div.color label:nth-child(5) span {
+  top: var(--twice);
+  background-color: #99f;
+}
+
+html:has(div.color input#blue:checked) {
+  --angle: 240deg;
+  --glow: #009a;
+  --hint: #00f3;
+}
+
+div.color label:nth-child(6) span {
+  top: var(--size);
+  background-color: #9cc;
+}
+
+html:has(div.color input#cyan:checked) {
+  --angle: 180deg;
+  --glow: #099a;
+  --hint: #0ff4;
+}
+
+div.color input:checked ~ span {
+  border: 2px solid black;
+}
+
 /* Each (missing) fruit in each image has an invisible custom-
  * fitted span overlay that reacts to the pointer. These must
  * be positioned absolutely.
@@ -138,7 +229,7 @@ span.fruit {
 label:has(#show-hints:checked) ~
  label:has(input:not(:checked))
  span.fruit {
-  background-color: #0f06;
+  background-color: var(--hint);
 }
 
 /* Each different checkbox has a parent label, and each parent
@@ -324,7 +415,7 @@ input:checked ~ span img {
 }
 
 /* Count all the non-slider inputs to calculate total */
-input:not(.slider) {
+input:not([class],[name]) {
   counter-increment: total;
 }
 
@@ -332,13 +423,13 @@ input:not(.slider) {
  * when the checkbox is checked. Counting those that are still
  * displayed gives the number of differences still to find.
  */
-input:not(.slider):not(:checked) + span {
+input:not([class], [name]):not(:checked) + span {
   counter-increment: remaining
 }
 
 /* Hide the active label element, so you can't uncheck the box */
-input:not(.slider):checked + span,
-input:not(.slider):checked ~ span span {
+input:not([class],[name]):checked + span,
+input:not([class],[name]):checked ~ span span {
   display: none;
 }
 
@@ -383,7 +474,7 @@ input:not(.slider):checked ~ span span {
 }
 
 .slider:checked ~ span::before {
-  background-color: #393;
+  background-color: var(--glow);
 }
 
 .slider:checked ~ span::after {
@@ -491,7 +582,7 @@ label:nth-of-type(1) input {
 }
 
 label:nth-of-type(2) input {
-  left: 1.5em;
+  left: 1em;
 }
 
 label:nth-of-type(3) input {
