@@ -10,8 +10,19 @@
   --glow: #009a;
   --hint: #00f6;
 
-  --image-width: 640px;
-  --image-height: 400px;
+  --image-width: 640;
+  --image-height: 400;
+
+  --main-width: min(var(--image-width)* 1px, calc(100vmin));
+  --u: calc(var(--main-width) / 640);
+  --main-height: calc(var(--image-height) * var(--u));
+
+  --b: calc(4 * var(--u));
+  --q: calc(-1 * var(--b));
+  --d: calc(var(--b) / sqrt(2));
+  --p: calc(-1 * var(--d));
+
+  font-size: calc(16 * var(--u));
 
   counter-reset:
     remaining 0
@@ -26,11 +37,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 main {
   /* Position images relative to main */
   position: relative;
+  width: var(--main-width);
+  overflow: auto;
 }
 
 /* Instructions and Congratulations */
@@ -40,7 +54,7 @@ h1 {
   left: 0;
   font-size: 1.95rem;
   line-height: 1em;
-  margin: 0.5em 10px;
+  margin: 0.5em calc(10 * var(--u));
   display: inline-block;
   background-color: #fff;
 }
@@ -60,11 +74,11 @@ h1.found {
   i {
     position: absolute;
     top: 0.5em;
-    left: 440px;
+    left: calc(440 * var(--u));
     background-color: #fff;
     display: inline-block;
-    width: 190px;
-    height: 25px;
+    width: calc(190 * var(--u));
+    height: calc(25 * var(--u));
   }
 }
 
@@ -95,6 +109,7 @@ img {
   position: absolute;
   top: 0;
   left: 0;
+  width: var(--main-width);
 }
 
 div {
@@ -102,8 +117,8 @@ div {
    * images they contain
    */
   position: relative;
-  width: var(--image-width);
-  height: var(--image-height);
+  width: var(--main-width);
+  height: var(--main-height);
 }
 
 /* Align the differences div with the top image. Its
@@ -128,11 +143,11 @@ input {
 /* Highlight color */
 
 div.color {
-  --size: 24px;
+  --size: calc(24 * var(--u));
   --twice: calc(2 * var(--size));
   position: absolute;
-  top: 57px;
-  right: 0.2em;
+  top: calc(56 * var(--u));
+  right: calc(3 * var(--u));
 }
 
 div.color span {
@@ -144,7 +159,7 @@ div.color span {
   height: var(--size);
   box-sizing: border-box;
   background-color: #8c8;
-  border: 1px solid white;
+  border: calc(1 * var(--u)) solid white;
 
 }
 
@@ -211,7 +226,7 @@ html:has(div.color input#cyan:checked) {
 }
 
 div.color input:checked ~ span {
-  border: 2px solid black;
+  border: calc(2 * var(--u)) solid black;
 }
 
 /* Each (missing) fruit in each image has an invisible custom-
@@ -241,7 +256,7 @@ label:has(#show-hints:checked) ~
 */
 span.delta {
   position: absolute;
-  top: var(--image-height);
+  top: var(--main-height);
 }
 
 /* The position, dimensions, rotation and various corner radii
@@ -263,115 +278,115 @@ span.delta {
  * spans
  */
 span.pepper-1 {
-  left: 55px;
-  top: 150px;
-  width: 45px;
-  height: 20px;
+  left: calc(55 * var(--u));
+  top: calc(150 * var(--u));
+  width: calc(45 * var(--u));
+  height: calc(20 * var(--u));
   border-radius: 100%;
   transform: rotate(30deg)
 }
 
 span.pepper-2 {
-  left: 91px;
-  top: 152px;
-  width: 43px;
-  height: 19px;
+  left: calc(91 * var(--u));
+  top: calc(152 * var(--u));
+  width: calc(43 * var(--u));
+  height: calc(19 * var(--u));
   border-radius: 100%;
   transform: rotate(-30deg)
 }
 
 /* There are two avocados to find */
 span.avocado_1  {
-  left: 56px;
-  top: 322px;
-  width: 75px;
-  height: 55px;
+  left: calc(56 * var(--u));
+  top: calc(322 * var(--u));
+  width: calc(75 * var(--u));
+  height: calc(55 * var(--u));
   border-top-left-radius: 100%;
   border-bottom-left-radius: 100%;
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
+  border-top-right-radius: calc(50 * var(--u));
+  border-bottom-right-radius: calc(50 * var(--u));
   transform: rotate(40deg)
 }
 
 span.kiwi  {
-  left: 219px;
-  top: 294px;
-  width: 60px;
-  height: 72px;
+  left: calc(219 * var(--u));
+  top: calc(294 * var(--u));
+  width: calc(60 * var(--u));
+  height: calc(72 * var(--u));
   border-radius: 100%;
   transform: rotate(-10deg)
 }
 
 span.orange  {
-  left: 268px;
-  top: 225px;
-  width: 45px;
-  height: 66px;
-  border-top-right-radius: 100px;
+  left: calc(268 * var(--u));
+  top: calc(225 * var(--u));
+  width: calc(45 * var(--u));
+  height: calc(66 * var(--u));
+  border-top-right-radius: calc(100 * var(--u));
   border-bottom-right-radius: 1000%;
   transform: rotate(13deg)
 }
 
 span.coconut  {
-  left: 317px;
-  top: 128px;
-  width: 94px;
-  height: 64px;
-  border-top-left-radius: 75px;
-  border-top-right-radius: 90px;
-  border-bottom-right-radius: 60px;
+  left: calc(317 * var(--u));
+  top: calc(128 * var(--u));
+  width: calc(94 * var(--u));
+  height: calc(64 * var(--u));
+  border-top-left-radius: calc(75 * var(--u));
+  border-top-right-radius: calc(90 * var(--u));
+  border-bottom-right-radius: calc(60 * var(--u));
   transform: rotate(55deg)
 }
 
 span.apple  {
-  left: 300px;
-  top: 273px;
-  width: 94px;
-  height: 93px;
-  border-radius: 100px;
+  left: calc(300 * var(--u));
+  top: calc(273 * var(--u));
+  width: calc(94 * var(--u));
+  height: calc(93 * var(--u));
+  border-radius: calc(100 * var(--u));
 }
 
 span.asparagus  {
-  left: 336px;
-  top: 5px;
-  width: 26px;
-  height: 110px;
-  border-top-left-radius: 400px;
+  left: calc(336 * var(--u));
+  top: calc(5 * var(--u));
+  width: calc(26 * var(--u));
+  height: calc(110 * var(--u));
+  border-top-left-radius: calc(400 * var(--u));
   border-top-right-radius: 500%;
   border-bottom-left-radius: 2000%;
   transform: rotate(16deg)
 }
 
 span.leaf  {
-  left: 442px;
-  top: 211px;
-  width: 50px;
-  height: 45px;
-  border-top-left-radius: 18px;
-  border-bottom-right-radius: 33px;
-  border-bottom-left-radius: 10px;
+  left: calc(442 * var(--u));
+  top: calc(211 * var(--u));
+  width: calc(50 * var(--u));
+  height: calc(45 * var(--u));
+  border-top-left-radius: calc(18 * var(--u));
+  border-bottom-right-radius: calc(33 * var(--u));
+  border-bottom-left-radius: calc(10 * var(--u));
 }
 
 span.grapes  {
-  left: 530px;
-  top: 113px;
-  width: 60px;
-  height: 38px;
-  border-top-right-radius: 20px;
+  left: calc(530 * var(--u));
+  top: calc(113 * var(--u));
+  width: calc(60 * var(--u));
+  height: calc(38 * var(--u));
+  border-top-right-radius: calc(20 * var(--u));
   border-top-left-radius: 500%;
-  border-bottom-right-radius: 110px;
+  border-bottom-right-radius: calc(110 * var(--u));
   transform: rotate(16deg)
 }
 
 span.avocado_2  {
-  left: 571px;
-  top: 277px;
-  width: 58px;
-  height: 65px;
+  left: calc(571 * var(--u));
+  top: calc(277 * var(--u));
+  width: calc(58 * var(--u));
+  height: calc(65 * var(--u));
   border-top-left-radius: 500%;
   border-top-right-radius: 1500%;
-  border-bottom-right-radius: 300px;
-  border-bottom-left-radius: 300px;
+  border-bottom-right-radius: calc(300 * var(--u));
+  border-bottom-left-radius: calc(300 * var(--u));
   transform: rotate(40deg)
 }
 
@@ -407,10 +422,10 @@ input:checked ~ span img {
     sepia(100%)
     saturate(10000%)
     hue-rotate(var(--angle))
-    drop-shadow( 2px  0px 2px var(--glow))
-    drop-shadow( 0px  2px 2px var(--glow))
-    drop-shadow(-2px  2px 2px var(--glow))
-    drop-shadow( 0px -2px 2px var(--glow))
+    drop-shadow( calc(2 * var(--u))  calc(0 * var(--u)) calc(2 * var(--u)) var(--glow))
+    drop-shadow( calc(0 * var(--u))  calc(2 * var(--u)) calc(2 * var(--u)) var(--glow))
+    drop-shadow(calc(-2 * var(--u))  calc(2 * var(--u)) calc(2 * var(--u)) var(--glow))
+    drop-shadow( calc(0 * var(--u)) calc(-2 * var(--u)) calc(2 * var(--u)) var(--glow))
   ;
 }
 
@@ -462,7 +477,7 @@ input:not([class],[name]):checked ~ span span {
   width: 2em;
   box-sizing: border-box;
   background-color: grey;
-  border: 1px solid grey;
+  border: calc(1 * var(--u)) solid grey;
   border-radius: 1em;
 }
 
@@ -496,7 +511,7 @@ label:has(#move-glow:checked) ~ label:has(input:checked) img {
       sepia(100%)
       saturate(10000%)
       hue-rotate(var(--angle))
-      drop-shadow( 4px 0px 4px var(--glow))
+      drop-shadow( var(--b) 0px var(--b) var(--glow))
   }
   12% {
     filter:
@@ -505,7 +520,7 @@ label:has(#move-glow:checked) ~ label:has(input:checked) img {
       sepia(100%)
       saturate(10000%)
       hue-rotate(var(--angle))
-      drop-shadow( 3px 3px 4px var(--glow))
+      drop-shadow( var(--d) var(--d) var(--b) var(--glow))
   }
   25% {
     filter:
@@ -514,7 +529,7 @@ label:has(#move-glow:checked) ~ label:has(input:checked) img {
       sepia(100%)
       saturate(10000%)
       hue-rotate(var(--angle))
-      drop-shadow( 0px 4px 4px var(--glow))
+      drop-shadow( 0px var(--b) var(--b) var(--glow))
   }
   37% {
     filter:
@@ -523,7 +538,7 @@ label:has(#move-glow:checked) ~ label:has(input:checked) img {
       sepia(100%)
       saturate(10000%)
       hue-rotate(var(--angle))
-      drop-shadow(-3px 3px 4px var(--glow))
+      drop-shadow(var(--p) var(--d) var(--b) var(--glow))
   }
   50% {
     filter:
@@ -532,7 +547,7 @@ label:has(#move-glow:checked) ~ label:has(input:checked) img {
       sepia(100%)
       saturate(10000%)
       hue-rotate(var(--angle))
-      drop-shadow(-4px 0px 4px var(--glow))
+      drop-shadow(var(--q) 0px var(--b) var(--glow))
   }
   62% {
     filter:
@@ -541,7 +556,7 @@ label:has(#move-glow:checked) ~ label:has(input:checked) img {
       sepia(100%)
       saturate(10000%)
       hue-rotate(var(--angle))
-      drop-shadow(-3px -3px 4px var(--glow))
+      drop-shadow(var(--p) var(--p) var(--b) var(--glow))
   }
   75% {
     filter:
@@ -550,7 +565,7 @@ label:has(#move-glow:checked) ~ label:has(input:checked) img {
       sepia(100%)
       saturate(10000%)
       hue-rotate(var(--angle))
-      drop-shadow( 0px -4px 4px var(--glow))
+      drop-shadow( 0px var(--q) var(--b) var(--glow))
   }
   87% {
       filter:
@@ -559,7 +574,7 @@ label:has(#move-glow:checked) ~ label:has(input:checked) img {
       sepia(100%)
       saturate(10000%)
       hue-rotate(var(--angle))
-      drop-shadow( 3px -3px 4px var(--glow))
+      drop-shadow( var(--d) var(--p) var(--b) var(--glow))
   }
   100% {
     filter:
@@ -568,7 +583,7 @@ label:has(#move-glow:checked) ~ label:has(input:checked) img {
       sepia(100%)
       saturate(10000%)
       hue-rotate(var(--angle))
-      drop-shadow( 4px 0px 4px var(--glow))
+      drop-shadow( var(--b) 0px var(--b) var(--glow))
   }
 }
 
