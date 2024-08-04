@@ -44,7 +44,7 @@ main {
   /* Position images relative to main */
   position: relative;
   width: var(--main-width);
-  overflow: auto;
+  overflow: hidden;
 }
 
 /* Instructions and Congratulations */
