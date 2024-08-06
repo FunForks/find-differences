@@ -1,7 +1,7 @@
 # Find the Differences #
 ### A CSS-only game (no JavaScript) ###
 
-[Demo](https://funforks.github.io/find-differences)
+[Demo](https://MERNCraft.github.io/find-differences)
 
 This game uses the following CSS features:
 

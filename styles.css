@@ -33,6 +33,20 @@ main {
   position: relative;
 }
 
+a {
+  width: 0;
+  height: 0;
+
+  img {
+    position: absolute;
+    left: 605px;
+    top: 765px;
+    width: 32px;
+    height: 32px;
+    filter: grayscale(1);
+  }
+}
+
 /* Instructions and Congratulations */
 h1 {
   position: absolute;
