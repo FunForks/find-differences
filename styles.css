@@ -47,6 +47,20 @@ main {
   overflow: hidden;
 }
 
+a {
+  width: 0;
+  height: 0;
+
+  img {
+    position: absolute;
+    left: calc(605 * var(--u));
+    top: calc(765 * var(--u));
+    width: calc(32 * var(--u));
+    height: calc(32 * var(--u));
+    filter: grayscale(1);
+  }
+}
+
 /* Instructions and Congratulations */
 h1 {
   position: absolute;
